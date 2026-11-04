@@ -93,12 +93,31 @@ Playwright 会启动 `vite preview`（`127.0.0.1:4173`）。自动化覆盖 Chro
 
 ## 部署
 
+个人使用部署在 Cloudflare Workers 静态资源上，计划地址：
+
+```text
+https://closettrace.bodytrace.top
+```
+
+1. 推送 `main` 到 `git@github.com:Yio1/closettrace.git`。CI（`.github/workflows/ci.yml`）只做校验，不部署。
+2. Cloudflare Dashboard → Workers & Pages → Create application → Connect to Git，选择 `closettrace` 仓库：
+   - 项目名称：`closettrace`（与 `wrangler.jsonc` 的 `name` 一致）
+   - 构建命令：`npm ci && npm run build`
+   - 部署命令：`npx wrangler deploy`
+   - 预览构建：关闭
+3. Settings → Build → Variables and Secrets 添加 `NODE_VERSION=22` 和 `WRANGLER_SEND_METRICS=false`。
+4. 首次部署会得到 `https://closettrace.<账户子域>.workers.dev`。
+5. 项目 → Settings → Domains & Routes → Add → Custom domain，添加 `closettrace.bodytrace.top`。`bodytrace.top` 的 Zone 必须与 Worker 在同一 Cloudflare 账户；Cloudflare 会自动创建 DNS 记录并签发证书。
+6. `wrangler.jsonc` 指向 `dist/` 并启用 `single-page-application` 回退，`public/_headers` 会随构建复制到 `dist/_headers`。不要添加 `_redirects`，避免 Workers 回退循环。
+
+后续推送 `main` 自动部署；回滚在项目 → Deployments → 选择旧版本 → Rollback。换域名会切换 IndexedDB 数据源，切换前先在旧地址导出备份，再到新地址导入。
+
+本地手动部署（需要先 `npx wrangler login`）：
+
 ```bash
 npm run build
 npx wrangler deploy
 ```
-
-`wrangler.jsonc` 指向 `dist/` 并启用 `single-page-application` 回退，`public/_headers` 会随构建复制到 `dist/_headers`。不要添加 `_redirects`，避免 Workers 回退循环。
 
 ## 已知限制
 
