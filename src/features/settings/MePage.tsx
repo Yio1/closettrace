@@ -100,8 +100,9 @@ export function MePage() {
 
       <h2 className="mb-2 mt-5 text-sm font-medium">数据</h2>
       <Card className="divide-y divide-line p-0">
-        <SettingsRow label="备份与恢复" />
-        <SettingsRow label="存储与诊断" />
+        <SettingsRow label="备份与恢复" to="/me/backup" />
+        <SettingsRow label="存储与诊断" to="/me/diagnostics" />
+        <SettingsRow label="安装指南" to="/me/install" />
       </Card>
 
       <p className="mt-6 text-center text-xs text-muted">

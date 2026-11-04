@@ -120,6 +120,13 @@ export function thumbFileName(photoId: string): string {
   return `thumbs/${photoId}.jpg`;
 }
 
+export function backupFileName(date = new Date()): string {
+  const pad = (value: number) => String(value).padStart(2, '0');
+  return `closettrace-backup-${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(
+    date.getDate(),
+  )}-${pad(date.getHours())}${pad(date.getMinutes())}.zip`;
+}
+
 export function exportBackupZip(
   bundle: BackupBundle,
   includePhotos = bundle.manifest.includesPhotos,

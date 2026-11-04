@@ -21,6 +21,9 @@ import { CpwPage } from '../features/purchase/CpwPage';
 import { MePage } from '../features/settings/MePage';
 import { ScenesPage } from '../features/settings/ScenesPage';
 import { StyleProfilePage } from '../features/settings/StyleProfilePage';
+import { DiagnosticsPage } from '../features/settings/DiagnosticsPage';
+import { InstallGuidePage } from '../features/settings/InstallGuidePage';
+import { BackupPage } from '../features/backup/BackupPage';
 
 export function AppRoutes() {
   return (
@@ -46,6 +49,9 @@ export function AppRoutes() {
         <Route path="/me" element={<MePage />} />
         <Route path="/me/style" element={<StyleProfilePage />} />
         <Route path="/me/scenes" element={<ScenesPage />} />
+        <Route path="/me/backup" element={<BackupPage />} />
+        <Route path="/me/diagnostics" element={<DiagnosticsPage />} />
+        <Route path="/me/install" element={<InstallGuidePage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

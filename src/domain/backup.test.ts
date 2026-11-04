@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { backupV1Data, emptyBackupData, manifestFor } from '../test/fixtures/backup-v1';
 import {
   BACKUP_SCHEMA_VERSION,
+  backupFileName,
   exportBackupZip,
   photoFileName,
   thumbFileName,
@@ -22,6 +23,12 @@ function bundleFrom(
 }
 
 describe('backup zip', () => {
+  it('names archives with the export date and time', () => {
+    expect(backupFileName(new Date(2026, 10, 4, 9, 5))).toBe(
+      'closettrace-backup-20261104-0905.zip',
+    );
+  });
+
   it('writes manifest with schema version, seed version and counts', () => {
     const data = backupV1Data();
     const zip = exportBackupZip(bundleFrom(data));

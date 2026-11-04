@@ -65,6 +65,7 @@ describe('MePage', () => {
       '位置管理',
       '备份与恢复',
       '存储与诊断',
+      '安装指南',
     ]) {
       expect(screen.getByText(label)).toBeInTheDocument();
     }
@@ -76,6 +77,12 @@ describe('MePage', () => {
     );
     expect(screen.getByRole('link', { name: /风格与尺码/ })).toHaveAttribute('href', '/me/style');
     expect(screen.getByRole('link', { name: /场景管理/ })).toHaveAttribute('href', '/me/scenes');
+    expect(screen.getByRole('link', { name: /备份与恢复/ })).toHaveAttribute('href', '/me/backup');
+    expect(screen.getByRole('link', { name: /存储与诊断/ })).toHaveAttribute(
+      'href',
+      '/me/diagnostics',
+    );
+    expect(screen.getByRole('link', { name: /安装指南/ })).toHaveAttribute('href', '/me/install');
   });
 
   it('shows backup status from local settings', async () => {
