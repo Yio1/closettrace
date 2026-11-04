@@ -1,30 +1,10 @@
 import type { ItemFilter } from '../../domain/itemFilter';
 import { filterItems } from '../../domain/itemFilter';
 import { landedCents } from '../../domain/money';
-import type { Item, ItemStatus, Pattern, Season } from '../../domain/types';
+import type { Item, ItemStatus, NewItemInput } from '../../domain/types';
 import { db, type ClosetTraceDB } from '../schema';
 
-export interface NewItemInput {
-  name: string;
-  categoryId: string;
-  colorPrimaryId: string;
-  warmth: number;
-  formality: number;
-  seasons: Season[];
-  brand?: string;
-  size?: string;
-  colorSecondaryId?: string;
-  pattern?: Pattern;
-  material?: string;
-  sceneTags?: string[];
-  styleTags?: string[];
-  locationId?: string;
-  locationDetail?: string;
-  status?: ItemStatus;
-  note?: string;
-  isFavorite?: boolean;
-  avoidRecommend?: boolean;
-}
+export type { NewItemInput } from '../../domain/types';
 
 function nowISO(): string {
   return new Date().toISOString();

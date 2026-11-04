@@ -6,6 +6,8 @@ import { ThemeProvider } from './ThemeProvider';
 import { OnboardingPage } from '../features/onboarding/OnboardingPage';
 import { TodayPage } from '../features/today/TodayPage';
 import { WardrobePage } from '../features/wardrobe/WardrobePage';
+import { ItemFormPage } from '../features/wardrobe/ItemFormPage';
+import { ItemDetailPage } from '../features/wardrobe/ItemDetailPage';
 import { OutfitsPage } from '../features/outfits/OutfitsPage';
 import { PurchasePage } from '../features/purchase/PurchasePage';
 import { MePage } from '../features/settings/MePage';
@@ -17,6 +19,9 @@ export function AppRoutes() {
       <Route element={<AppShell />}>
         <Route index element={<TodayPage />} />
         <Route path="/wardrobe" element={<WardrobePage />} />
+        <Route path="/wardrobe/item/new" element={<ItemFormPage />} />
+        <Route path="/wardrobe/item/:id" element={<ItemDetailPage />} />
+        <Route path="/wardrobe/item/:id/edit" element={<ItemFormPage />} />
         <Route path="/outfits" element={<OutfitsPage />} />
         <Route path="/purchase" element={<PurchasePage />} />
         <Route path="/me" element={<MePage />} />

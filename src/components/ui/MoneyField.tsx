@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { parseYuanToCents } from '../../domain/money';
 
 export function MoneyField({
@@ -14,10 +14,12 @@ export function MoneyField({
 }) {
   const id = useId();
   const [text, setText] = useState(valueCents == null ? '' : formatInput(valueCents));
+  const [syncedCents, setSyncedCents] = useState(valueCents);
 
-  useEffect(() => {
+  if (valueCents !== syncedCents) {
+    setSyncedCents(valueCents);
     setText(valueCents == null ? '' : formatInput(valueCents));
-  }, [valueCents]);
+  }
 
   return (
     <label className="block" htmlFor={id}>
@@ -26,6 +28,7 @@ export function MoneyField({
         <span className="text-muted">¥</span>
         <input
           id={id}
+          aria-label={label}
           inputMode="decimal"
           value={text}
           placeholder="0"

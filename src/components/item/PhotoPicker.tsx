@@ -28,6 +28,7 @@ export function PhotoPicker({
     for (const photo of photos) {
       next[photo.id] = URL.createObjectURL(photo.thumbBlob);
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- object URLs are an external resource
     setThumbs(next);
     return () => {
       for (const url of Object.values(next)) URL.revokeObjectURL(url);

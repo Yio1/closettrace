@@ -1,5 +1,12 @@
 import type { ReactNode } from 'react';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 
 type Theme = 'system' | 'light' | 'dark';
 type ResolvedTheme = 'light' | 'dark';
@@ -12,10 +19,16 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function resolveTheme(theme: Theme): ResolvedTheme {
-  if (theme !== 'system') return theme;
-  if (typeof window === 'undefined' || !window.matchMedia) return 'light';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+function subscribeSystemTheme(callback: () => void): () => void {
+  if (typeof window === 'undefined' || !window.matchMedia) return () => {};
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+  media.addEventListener?.('change', callback);
+  return () => media.removeEventListener?.('change', callback);
+}
+
+function systemPrefersDark(): boolean {
+  if (typeof window === 'undefined' || !window.matchMedia) return false;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 
 function readStoredTheme(): Theme {
@@ -26,26 +39,14 @@ function readStoredTheme(): Theme {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(readStoredTheme);
-  const [resolved, setResolved] = useState<ResolvedTheme>(() => resolveTheme(theme));
+  const prefersDark = useSyncExternalStore(subscribeSystemTheme, systemPrefersDark, () => false);
+  const resolved: ResolvedTheme =
+    theme === 'system' ? (prefersDark ? 'dark' : 'light') : theme;
 
   useEffect(() => {
-    const next = resolveTheme(theme);
-    setResolved(next);
-    document.documentElement.classList.toggle('dark', next === 'dark');
+    document.documentElement.classList.toggle('dark', resolved === 'dark');
     localStorage.setItem('closet:theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
-    if (theme !== 'system' || !window.matchMedia) return;
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const handler = () => {
-      const next = resolveTheme('system');
-      setResolved(next);
-      document.documentElement.classList.toggle('dark', next === 'dark');
-    };
-    media.addEventListener?.('change', handler);
-    return () => media.removeEventListener?.('change', handler);
-  }, [theme]);
+  }, [theme, resolved]);
 
   const value = useMemo(() => ({ theme, resolved, setTheme }), [theme, resolved]);
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

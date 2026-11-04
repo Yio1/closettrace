@@ -5,6 +5,8 @@ export function useObjectUrl(blob?: Blob | null): string | undefined {
 
   useEffect(() => {
     if (!blob) {
+      // Object URLs are an external resource; state mirrors that external life cycle.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUrl(undefined);
       return;
     }
