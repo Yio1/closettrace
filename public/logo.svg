@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="衣迹">
+  <rect width="512" height="512" rx="112" fill="#F6F2EA" />
+  <path d="M256 122a38 38 0 1 1 38-38" fill="none" stroke="#A9502F" stroke-width="24" stroke-linecap="round" />
+  <path d="M256 122v42" fill="none" stroke="#A9502F" stroke-width="24" stroke-linecap="round" />
+  <path d="M256 164 96 288h320L256 164Z" fill="none" stroke="#A9502F" stroke-width="24" stroke-linejoin="round" />
+  <path d="M168 288v104c0 18 14 32 32 32h112c18 0 32-14 32-32V288" fill="none" stroke="#3F7A55" stroke-width="24" stroke-linejoin="round" />
+  <path d="M208 340h96" fill="none" stroke="#3F7A55" stroke-width="20" stroke-linecap="round" />
+</svg>
