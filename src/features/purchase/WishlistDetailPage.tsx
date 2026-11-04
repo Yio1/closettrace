@@ -6,6 +6,7 @@ import { landedCents, formatCents } from '../../domain/money';
 import { lowestQuote, priceDelta, sortQuotesByLanded } from '../../domain/price';
 import { listCategories } from '../../db/repositories/categories';
 import { getWishlist, listQuotes, updateWishlist } from '../../db/repositories/wishlist';
+import { Sparkline } from '../../components/charts/Sparkline';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { EmptyState } from '../../components/ui/EmptyState';
@@ -99,6 +100,21 @@ export function WishlistDetailPage() {
           </>
         ) : null}
       </div>
+
+      {quotes.length >= 2 ? (
+        <Card className="flex items-center justify-between gap-3">
+          <p className="text-sm font-medium">报价走势</p>
+          <Sparkline
+            label="报价走势"
+            values={quotes
+              .slice()
+              .sort((a, b) => a.observedAt.localeCompare(b.observedAt))
+              .map((quote) =>
+                landedCents(quote.priceCents, quote.shippingCents, quote.discountCents),
+              )}
+          />
+        </Card>
+      ) : null}
 
       {sorted.length === 0 ? (
         <p className="py-6 text-center text-sm text-muted">还没有报价，添加第一条来比价。</p>

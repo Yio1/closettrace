@@ -12,6 +12,8 @@ import { Card } from '../../components/ui/Card';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { PageHeader } from '../../components/ui/PageHeader';
 import { SegmentedControl } from '../../components/ui/SegmentedControl';
+import { CpwView } from './CpwPage';
+import { SpendingView } from './SpendingPage';
 import { WishlistFormSheet } from './WishlistFormSheet';
 
 type PurchaseView = 'wishlist' | 'spending' | 'cpw';
@@ -62,9 +64,9 @@ export function PurchasePage() {
       </div>
 
       {view === 'spending' ? (
-        <p className="py-8 text-center text-sm text-muted">花费统计即将上线。</p>
+        <SpendingView />
       ) : view === 'cpw' ? (
-        <p className="py-8 text-center text-sm text-muted">穿着成本即将上线。</p>
+        <CpwView />
       ) : wishlist.length === 0 ? (
         <EmptyState
           icon={<ShoppingBag size={28} aria-hidden />}

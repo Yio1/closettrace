@@ -60,6 +60,9 @@ export function WardrobeInsightsPage() {
           <p className="tabular mt-1 text-2xl font-semibold">
             {averageCost == null ? '暂无' : formatCents(averageCost)}
           </p>
+          <Link to="/purchase/cpw" className="mt-1 inline-flex text-xs text-accent-text">
+            查看穿着成本
+          </Link>
         </Card>
         <Card>
           <p className="text-sm text-muted">90 天利用率</p>
