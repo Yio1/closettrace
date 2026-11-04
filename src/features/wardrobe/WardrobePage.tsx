@@ -1,6 +1,6 @@
 import { useDeferredValue, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import type { ItemStatus } from '../../domain/types';
 import { filterItems } from '../../domain/itemFilter';
@@ -20,11 +20,20 @@ const MANUAL_STATUSES: ItemStatus[] = ['available', 'laundry', 'repair', 'stored
 
 export function WardrobePage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const allItems = useLiveQuery(() => listItems({ includeRetired: true }), []);
-  const [filters, setFilters] = useState<WardrobeFilterState>({
-    query: '',
-    status: 'all',
-    includeRetired: false,
+  const [filters, setFilters] = useState<WardrobeFilterState>(() => {
+    const status = searchParams.get('status');
+    const allowed: Array<ItemStatus | 'all'> = [
+      'available',
+      'laundry',
+      'repair',
+      'stored',
+      'retired',
+      'all',
+    ];
+    const initialStatus = allowed.find((entry) => entry === status) ?? 'all';
+    return { query: '', status: initialStatus, includeRetired: false };
   });
   const deferredQuery = useDeferredValue(filters.query);
   const [selectionMode, setSelectionMode] = useState(false);
