@@ -2,66 +2,21 @@ import { useDeferredValue, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useNavigate } from 'react-router-dom';
 import { Plus } from 'lucide-react';
-import type { Item, ItemStatus } from '../../domain/types';
+import type { ItemStatus } from '../../domain/types';
 import { filterItems } from '../../domain/itemFilter';
 import { ITEM_STATUS_LABELS } from '../../domain/itemStatus';
-import { locationPath } from '../../domain/locationTree';
-import { listCategories } from '../../db/repositories/categories';
-import { listColors } from '../../db/repositories/dictionaries';
 import { listItems, moveItems, setItemsStatus } from '../../db/repositories/items';
-import { listLocations } from '../../db/repositories/locations';
-import { getThumb } from '../../db/repositories/photos';
 import { BatchBar } from './BatchBar';
 import { WardrobeFilters, type WardrobeFilterState } from './WardrobeFilters';
-import { ItemCard } from '../../components/item/ItemCard';
+import { WardrobeItemCard } from './WardrobeItemCard';
+import { WardrobeTabs } from './WardrobeTabs';
 import { LocationPicker } from '../../components/item/LocationPicker';
 import { Button } from '../../components/ui/Button';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { PageHeader } from '../../components/ui/PageHeader';
 import { Sheet } from '../../components/ui/Sheet';
-import { useObjectUrl } from '../../lib/useObjectUrl';
 
 const MANUAL_STATUSES: ItemStatus[] = ['available', 'laundry', 'repair', 'stored'];
-
-function WardrobeCard({
-  item,
-  selectionMode,
-  selected,
-  onClick,
-  onLongPress,
-}: {
-  item: Item;
-  selectionMode: boolean;
-  selected: boolean;
-  onClick: () => void;
-  onLongPress: () => void;
-}) {
-  const navigate = useNavigate();
-  const categories = useLiveQuery(() => listCategories(), []);
-  const locations = useLiveQuery(() => listLocations(), []);
-  const colors = useLiveQuery(() => listColors(), []);
-  const thumb = useLiveQuery<Blob | undefined>(
-    async () => (item.thumbPhotoId ? await getThumb(item.thumbPhotoId) : undefined),
-    [item.thumbPhotoId],
-  );
-  const thumbUrl = useObjectUrl(thumb);
-
-  return (
-    <ItemCard
-      item={item}
-      category={categories?.find((category) => category.id === item.categoryId)}
-      color={colors?.find((color) => color.id === item.colorPrimaryId)}
-      locationPath={item.locationId ? locationPath(locations ?? [], item.locationId) : undefined}
-      thumbUrl={thumbUrl}
-      selected={selectionMode ? selected : undefined}
-      onClick={() => {
-        if (selectionMode) onClick();
-        else navigate(`/wardrobe/item/${item.id}`);
-      }}
-      onLongPress={onLongPress}
-    />
-  );
-}
 
 export function WardrobePage() {
   const navigate = useNavigate();
@@ -167,6 +122,8 @@ export function WardrobePage() {
         }
       />
 
+      <WardrobeTabs />
+
       <WardrobeFilters value={filters} onChange={updateFilters} />
 
       {allItems === undefined ? null : visible.length === 0 ? (
@@ -195,7 +152,7 @@ export function WardrobePage() {
       ) : (
         <div className="grid grid-cols-2 gap-3">
           {visible.map((item) => (
-            <WardrobeCard
+            <WardrobeItemCard
               key={item.id}
               item={item}
               selectionMode={selectionMode}

@@ -47,6 +47,46 @@ export function buildLocationTree(locations: Location[]): LocationNode[] {
   return tree;
 }
 
+export function descendantLocationIds(locations: Location[], rootId: string): Set<string> {
+  const childrenByParent = new Map<string, Location[]>();
+  for (const location of locations) {
+    if (!location.parentId) continue;
+    const siblings = childrenByParent.get(location.parentId) ?? [];
+    siblings.push(location);
+    childrenByParent.set(location.parentId, siblings);
+  }
+  const result = new Set<string>();
+  const queue = [rootId];
+  while (queue.length > 0) {
+    const id = queue.shift() as string;
+    if (result.has(id)) continue;
+    result.add(id);
+    for (const child of childrenByParent.get(id) ?? []) queue.push(child.id);
+  }
+  const known = new Set(locations.map((location) => location.id));
+  for (const id of [...result]) if (!known.has(id)) result.delete(id);
+  return result;
+}
+
+export function countItemsByLocation(
+  locations: Location[],
+  items: Array<{ locationId?: string }>,
+): Map<string, number> {
+  const parentById = new Map(locations.map((location) => [location.id, location.parentId]));
+  const counts = new Map<string, number>();
+  for (const item of items) {
+    if (!item.locationId) continue;
+    const seen = new Set<string>();
+    let current: string | undefined = item.locationId;
+    while (current && parentById.has(current) && !seen.has(current)) {
+      seen.add(current);
+      counts.set(current, (counts.get(current) ?? 0) + 1);
+      current = parentById.get(current);
+    }
+  }
+  return counts;
+}
+
 export function locationPath(locations: Location[], id?: string): string {
   if (!id) return '未指定';
   const byId = new Map(locations.map((location) => [location.id, location]));

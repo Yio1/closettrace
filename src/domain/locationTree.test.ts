@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import type { Location } from './types';
-import { buildLocationTree, locationPath } from './locationTree';
+import {
+  buildLocationTree,
+  countItemsByLocation,
+  descendantLocationIds,
+  locationPath,
+} from './locationTree';
 
 function location(
   id: string,
@@ -63,5 +68,31 @@ describe('locationTree', () => {
     const b = location('b', 'B', 2, 'a');
     expect(() => buildLocationTree([a, b])).not.toThrow();
     expect(locationPath([a, b], 'a')).toBe('B / A');
+  });
+
+  it('counts items on every ancestor', () => {
+    const counts = countItemsByLocation(all, [
+      { locationId: 'rail' },
+      { locationId: 'drawer' },
+      { locationId: 'shoe' },
+      {},
+      { locationId: 'missing' },
+    ]);
+    expect(counts.get('rail')).toBe(1);
+    expect(counts.get('wardrobe')).toBe(2);
+    expect(counts.get('bedroom')).toBe(2);
+    expect(counts.get('shoe')).toBe(1);
+  });
+
+  it('collects a location subtree with a cycle guard', () => {
+    expect([...descendantLocationIds(all, 'wardrobe')].sort()).toEqual([
+      'drawer',
+      'rail',
+      'wardrobe',
+    ]);
+    const a = location('a', 'A', 1, 'b');
+    const b = location('b', 'B', 2, 'a');
+    expect(descendantLocationIds([a, b], 'a').size).toBe(2);
+    expect(descendantLocationIds(all, 'missing').size).toBe(0);
   });
 });
