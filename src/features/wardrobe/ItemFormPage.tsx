@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import type { ItemPhoto, Season } from '../../domain/types';
 import {
@@ -29,6 +29,7 @@ import {
   setCover,
 } from '../../db/repositories/photos';
 import { addPurchase, listPurchases, updatePurchase } from '../../db/repositories/purchases';
+import { convertWishlistToPurchase, getWishlist, listQuotes } from '../../db/repositories/wishlist';
 import { db } from '../../db/schema';
 import { compressImage } from '../../lib/image';
 import { CategoryPicker } from '../../components/item/CategoryPicker';
@@ -49,6 +50,9 @@ const MAX_PHOTOS = 5;
 export function ItemFormPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const wishlistId = id ? undefined : (searchParams.get('wishlistId') ?? undefined);
+  const quoteId = id ? undefined : (searchParams.get('quoteId') ?? undefined);
   const draftKey = itemFormDraftKey(id);
   const [form, setForm] = useState<ItemFormState | null>(null);
   const [errors, setErrors] = useState<ItemFormErrors>({});
@@ -77,7 +81,35 @@ export function ItemFormPage() {
         }
       }
       if (!id) {
-        if (!cancelled) setForm(emptyFormState(todayISO()));
+        if (!wishlistId) {
+          if (!cancelled) setForm(emptyFormState(todayISO()));
+          return;
+        }
+        const [wishlist, categoryRows] = await Promise.all([
+          getWishlist(wishlistId),
+          listCategories(),
+        ]);
+        if (cancelled) return;
+        if (!wishlist) {
+          setForm(emptyFormState(todayISO()));
+          return;
+        }
+        const quote = quoteId
+          ? (await listQuotes(wishlistId)).find((entry) => entry.id === quoteId)
+          : undefined;
+        if (cancelled) return;
+        const category = categoryRows.find((entry) => entry.id === wishlist.categoryId);
+        setForm({
+          ...emptyFormState(todayISO(), category),
+          name: wishlist.name,
+          brand: wishlist.brand ?? '',
+          categoryId: wishlist.categoryId,
+          size: wishlist.size ?? '',
+          purchaseChannel: quote?.channel ?? '',
+          purchasePriceCents: quote?.priceCents ?? 0,
+          purchaseShippingCents: quote?.shippingCents ?? 0,
+          purchaseDiscountCents: quote?.discountCents ?? 0,
+        });
         return;
       }
       const item = await getItem(id);
@@ -94,7 +126,7 @@ export function ItemFormPage() {
     return () => {
       cancelled = true;
     };
-  }, [draftKey, id]);
+  }, [draftKey, id, wishlistId, quoteId]);
 
   useEffect(() => {
     if (!form) return;
@@ -281,9 +313,14 @@ export function ItemFormPage() {
           if (coverAfterSave && coverAfterSave !== firstSavedId) {
             await setCover(newId, coverAfterSave);
           }
-          if (wantsPurchase) await addPurchase({ itemId: newId, ...purchaseInput });
+          if (wantsPurchase && !wishlistId) {
+            await addPurchase({ itemId: newId, ...purchaseInput });
+          }
         },
       );
+      if (wishlistId) {
+        await convertWishlistToPurchase(wishlistId, quoteId, newId, purchaseInput);
+      }
       sessionStorage.removeItem(draftKey);
       navigate(`/wardrobe/item/${newId}`, { replace: true });
     } catch {
