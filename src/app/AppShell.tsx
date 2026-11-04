@@ -1,5 +1,7 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Navigate, NavLink, Outlet } from 'react-router-dom';
+import { useLiveQuery } from 'dexie-react-hooks';
 import { Layers, Shirt, Sun, User, Wallet } from 'lucide-react';
+import { getSetting } from '../db/repositories/settings';
 import { PwaUpdate } from './PwaUpdate';
 
 const tabs = [
@@ -35,6 +37,13 @@ export function TabBar() {
 }
 
 export function AppShell() {
+  const onboardingDone = useLiveQuery(
+    () => getSetting<boolean>('onboardingDone', false),
+    [],
+  );
+
+  if (onboardingDone === false) return <Navigate to="/onboarding" replace />;
+
   return (
     <>
       <main className="mx-auto min-h-dvh max-w-lg px-4 pb-28 pt-[calc(env(safe-area-inset-top)+16px)]">
