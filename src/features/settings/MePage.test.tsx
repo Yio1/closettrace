@@ -74,6 +74,8 @@ describe('MePage', () => {
       'href',
       '/wardrobe/locations',
     );
+    expect(screen.getByRole('link', { name: /风格与尺码/ })).toHaveAttribute('href', '/me/style');
+    expect(screen.getByRole('link', { name: /场景管理/ })).toHaveAttribute('href', '/me/scenes');
   });
 
   it('shows backup status from local settings', async () => {

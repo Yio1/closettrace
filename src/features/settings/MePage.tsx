@@ -92,8 +92,8 @@ export function MePage() {
 
       <h2 className="mb-2 mt-5 text-sm font-medium">衣橱设置</h2>
       <Card className="divide-y divide-line p-0">
-        <SettingsRow label="风格与尺码" />
-        <SettingsRow label="场景管理" />
+        <SettingsRow label="风格与尺码" to="/me/style" />
+        <SettingsRow label="场景管理" to="/me/scenes" />
         <SettingsRow label="类型管理" />
         <SettingsRow label="位置管理" to="/wardrobe/locations" />
       </Card>

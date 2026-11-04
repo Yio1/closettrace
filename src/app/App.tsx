@@ -16,6 +16,8 @@ import { OutfitEditorPage } from '../features/outfits/OutfitEditorPage';
 import { OutfitDetailPage } from '../features/outfits/OutfitDetailPage';
 import { PurchasePage } from '../features/purchase/PurchasePage';
 import { MePage } from '../features/settings/MePage';
+import { ScenesPage } from '../features/settings/ScenesPage';
+import { StyleProfilePage } from '../features/settings/StyleProfilePage';
 
 export function AppRoutes() {
   return (
@@ -36,6 +38,8 @@ export function AppRoutes() {
         <Route path="/outfits/:id/edit" element={<OutfitEditorPage />} />
         <Route path="/purchase" element={<PurchasePage />} />
         <Route path="/me" element={<MePage />} />
+        <Route path="/me/style" element={<StyleProfilePage />} />
+        <Route path="/me/scenes" element={<ScenesPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
