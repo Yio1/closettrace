@@ -12,3 +12,7 @@ export function parseYuanToCents(input: string): number | null {
   const [yuan, fraction = ''] = text.split('.');
   return Number(yuan) * 100 + Number(fraction.padEnd(2, '0'));
 }
+
+export function landedCents(price: number, shipping: number, discount: number): number {
+  return Math.max(0, Math.round(price + shipping - discount));
+}
