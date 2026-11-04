@@ -2,6 +2,26 @@ import type { ColorSwatch, Item, Scene, Slot } from './types';
 
 export const OUTDOOR_SCENE_ID = 'builtin:scene:outdoor';
 
+export const OUTFIT_SLOT_ORDER: Slot[] = [
+  'top',
+  'bottom',
+  'dress',
+  'outer',
+  'shoes',
+  'bag',
+  'accessory',
+];
+
+export const SLOT_LABELS: Record<Slot, string> = {
+  top: '上装',
+  bottom: '下装',
+  dress: '连衣裙',
+  outer: '外套',
+  shoes: '鞋',
+  bag: '包',
+  accessory: '配饰',
+};
+
 export interface OutfitCompleteness {
   complete: boolean;
   missing: Slot[];

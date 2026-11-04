@@ -79,6 +79,10 @@ export async function listOutfitItems(
   return rows.sort((a, b) => a.order - b.order);
 }
 
+export async function listAllOutfitItems(database: ClosetTraceDB = db): Promise<OutfitItem[]> {
+  return database.outfitItems.toArray();
+}
+
 export async function updateOutfit(
   id: string,
   patch: Partial<Outfit>,

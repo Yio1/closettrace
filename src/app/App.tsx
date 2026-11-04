@@ -12,6 +12,8 @@ import { LocationsPage } from '../features/wardrobe/LocationsPage';
 import { LocationDetailPage } from '../features/wardrobe/LocationDetailPage';
 import { WardrobeInsightsPage } from '../features/wardrobe/WardrobeInsightsPage';
 import { OutfitsPage } from '../features/outfits/OutfitsPage';
+import { OutfitEditorPage } from '../features/outfits/OutfitEditorPage';
+import { OutfitDetailPage } from '../features/outfits/OutfitDetailPage';
 import { PurchasePage } from '../features/purchase/PurchasePage';
 import { MePage } from '../features/settings/MePage';
 
@@ -29,6 +31,9 @@ export function AppRoutes() {
         <Route path="/wardrobe/locations/:id" element={<LocationDetailPage />} />
         <Route path="/wardrobe/insights" element={<WardrobeInsightsPage />} />
         <Route path="/outfits" element={<OutfitsPage />} />
+        <Route path="/outfits/new" element={<OutfitEditorPage />} />
+        <Route path="/outfits/:id" element={<OutfitDetailPage />} />
+        <Route path="/outfits/:id/edit" element={<OutfitEditorPage />} />
         <Route path="/purchase" element={<PurchasePage />} />
         <Route path="/me" element={<MePage />} />
       </Route>
