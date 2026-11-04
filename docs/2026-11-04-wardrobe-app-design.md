@@ -270,13 +270,14 @@
 - 历史记录保存快照：删除衣物、搭配、场景后，穿着记录仍能显示当时穿了什么。
 - 照片以 Blob 存在独立表，衣物行只保存照片 ID 和缩略图 ID，避免列表查询拖入大对象。
 
-### 5.2 表清单（v1，14 张）
+### 5.2 表清单（v1，16 张）
 
 | 分组 | 表 |
 |---|---|
 | 衣橱 | `items`、`itemPhotos`、`categories`、`locations` |
 | 搭配与穿着 | `outfits`、`outfitItems`、`wearLogs`、`scenes`、`outfitFeedback` |
 | 采购 | `purchases`、`wishlistItems`、`priceQuotes` |
+| 字典 | `colors`、`styleTags` |
 | 系统 | `settings`、`diagnostics` |
 
 ### 5.3 类型定义
@@ -519,18 +520,20 @@ export interface StyleTag {
 ```ts
 this.version(1).stores({
   items:
-    'id, name, categoryId, status, locationId, isFavorite, lastWornAt, updatedAt, archivedAt, *sceneTags, *seasons, *styleTags',
+    'id, name, categoryId, status, locationId, lastWornAt, updatedAt, archivedAt, *sceneTags, *seasons, *styleTags',
   itemPhotos: 'id, itemId, [itemId+order]',
-  categories: 'id, parentId, slot, archived, order',
+  categories: 'id, parentId, slot, order',
   locations: 'id, parentId, order',
-  outfits: 'id, isFavorite, lastWornAt, updatedAt, *sceneIds',
+  outfits: 'id, lastWornAt, updatedAt, *sceneIds',
   outfitItems: 'id, outfitId, itemId, [outfitId+order]',
   wearLogs: 'id, date, outfitId, sceneId, [date+sceneId], *itemIds',
-  scenes: 'id, archived, order',
+  scenes: 'id, order',
   purchases: 'id, itemId, purchasedAt, channel',
   wishlistItems: 'id, status, categoryId, priority, updatedAt',
   priceQuotes: 'id, wishlistId, observedAt, [wishlistId+observedAt]',
   outfitFeedback: 'id, signature, sceneId',
+  colors: 'id, family, order',
+  styleTags: 'id, order',
   settings: 'key',
   diagnostics: 'id, at',
 });
@@ -538,6 +541,7 @@ this.version(1).stores({
 
 说明：
 
+- IndexedDB 不能把布尔值作为索引键，因此 `isFavorite`、`archived`、`isNeutral` 只存储、不建索引，筛选和排序在内存中完成（衣橱规模 ≤ 2000 时足够）。
 - `items` 的 `*sceneTags`、`*seasons`、`*styleTags` 是 Dexie 多值索引，支持“按场景/季节/风格筛选”。
 - `wearLogs` 同时保存 `itemIds` 数组和快照；`*itemIds` 支持“这件衣服穿过哪些天”。
 - 名称搜索不使用 Dexie 前缀索引，改为取出后内存过滤；中文子串搜索更符合直觉，衣橱规模 ≤ 2000 时性能足够。

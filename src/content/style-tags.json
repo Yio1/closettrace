@@ -1,0 +1,12 @@
+[
+  { "id": "builtin:style:minimal", "name": "简约", "order": 10 },
+  { "id": "builtin:style:casual", "name": "休闲", "order": 20 },
+  { "id": "builtin:style:business", "name": "商务", "order": 30 },
+  { "id": "builtin:style:sport", "name": "运动", "order": 40 },
+  { "id": "builtin:style:street", "name": "街头", "order": 50 },
+  { "id": "builtin:style:retro", "name": "复古", "order": 60 },
+  { "id": "builtin:style:sweet", "name": "甜美", "order": 70 },
+  { "id": "builtin:style:techwear", "name": "机能", "order": 80 },
+  { "id": "builtin:style:artsy", "name": "文艺", "order": 90 },
+  { "id": "builtin:style:neutral", "name": "中性", "order": 100 }
+]

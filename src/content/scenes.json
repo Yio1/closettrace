@@ -1,0 +1,92 @@
+[
+  {
+    "id": "builtin:scene:commute",
+    "name": "通勤",
+    "formalityMin": 3,
+    "formalityMax": 3,
+    "requiredSlots": ["top", "bottom", "shoes"],
+    "optionalSlots": ["outer", "bag", "accessory"],
+    "styleTags": ["builtin:style:business", "builtin:style:minimal", "builtin:style:neutral"],
+    "order": 10
+  },
+  {
+    "id": "builtin:scene:business",
+    "name": "商务/正式",
+    "formalityMin": 4,
+    "formalityMax": 5,
+    "requiredSlots": ["top", "bottom", "shoes"],
+    "optionalSlots": ["outer", "bag", "accessory"],
+    "styleTags": ["builtin:style:business", "builtin:style:minimal"],
+    "order": 20
+  },
+  {
+    "id": "builtin:scene:casual",
+    "name": "休闲",
+    "formalityMin": 2,
+    "formalityMax": 2,
+    "requiredSlots": ["top", "bottom", "shoes"],
+    "optionalSlots": ["outer", "bag", "accessory"],
+    "styleTags": ["builtin:style:casual", "builtin:style:neutral"],
+    "order": 30
+  },
+  {
+    "id": "builtin:scene:date",
+    "name": "约会",
+    "formalityMin": 3,
+    "formalityMax": 3,
+    "requiredSlots": ["top", "bottom", "shoes"],
+    "optionalSlots": ["outer", "bag", "accessory"],
+    "styleTags": ["builtin:style:sweet", "builtin:style:minimal"],
+    "order": 40
+  },
+  {
+    "id": "builtin:scene:party",
+    "name": "聚会",
+    "formalityMin": 3,
+    "formalityMax": 4,
+    "requiredSlots": ["top", "bottom", "shoes"],
+    "optionalSlots": ["outer", "bag", "accessory"],
+    "styleTags": ["builtin:style:street", "builtin:style:sweet", "builtin:style:retro"],
+    "order": 50
+  },
+  {
+    "id": "builtin:scene:sport",
+    "name": "运动",
+    "formalityMin": 1,
+    "formalityMax": 1,
+    "requiredSlots": ["top", "bottom", "shoes"],
+    "optionalSlots": ["outer", "accessory"],
+    "styleTags": ["builtin:style:sport"],
+    "order": 60
+  },
+  {
+    "id": "builtin:scene:home",
+    "name": "居家",
+    "formalityMin": 1,
+    "formalityMax": 1,
+    "requiredSlots": ["top", "bottom"],
+    "optionalSlots": ["shoes", "accessory"],
+    "styleTags": ["builtin:style:casual", "builtin:style:neutral"],
+    "order": 70
+  },
+  {
+    "id": "builtin:scene:outdoor",
+    "name": "户外",
+    "formalityMin": 2,
+    "formalityMax": 2,
+    "requiredSlots": ["top", "bottom", "shoes"],
+    "optionalSlots": ["outer", "bag", "accessory"],
+    "styleTags": ["builtin:style:sport", "builtin:style:techwear", "builtin:style:casual"],
+    "order": 80
+  },
+  {
+    "id": "builtin:scene:travel",
+    "name": "旅行",
+    "formalityMin": 2,
+    "formalityMax": 3,
+    "requiredSlots": ["top", "bottom", "shoes"],
+    "optionalSlots": ["outer", "bag", "accessory"],
+    "styleTags": ["builtin:style:casual", "builtin:style:minimal", "builtin:style:techwear"],
+    "order": 90
+  }
+]

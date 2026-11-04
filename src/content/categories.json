@@ -1,0 +1,633 @@
+[
+  {
+    "id": "builtin:cat:top",
+    "name": "上装",
+    "slot": "top",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 10
+  },
+  {
+    "id": "builtin:cat:bottom",
+    "name": "下装",
+    "slot": "bottom",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 20
+  },
+  {
+    "id": "builtin:cat:dress",
+    "name": "连衣裙/连体",
+    "slot": "dress",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 30
+  },
+  {
+    "id": "builtin:cat:outer",
+    "name": "外套",
+    "slot": "outer",
+    "defaultFormality": 3,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["spring", "autumn", "winter"],
+    "order": 40
+  },
+  {
+    "id": "builtin:cat:shoes",
+    "name": "鞋履",
+    "slot": "shoes",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 50
+  },
+  {
+    "id": "builtin:cat:bag",
+    "name": "包袋",
+    "slot": "bag",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 60
+  },
+  {
+    "id": "builtin:cat:accessory",
+    "name": "配饰",
+    "slot": "accessory",
+    "defaultFormality": 3,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 70
+  },
+  {
+    "id": "builtin:cat:underwear",
+    "name": "内衣/家居",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 80
+  },
+  {
+    "id": "builtin:cat:sport",
+    "name": "运动",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 90
+  },
+  {
+    "id": "builtin:cat:tshirt",
+    "name": "T 恤",
+    "parentId": "builtin:cat:top",
+    "slot": "top",
+    "defaultFormality": 2,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["summer", "spring", "autumn"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:shirt",
+    "name": "衬衫",
+    "parentId": "builtin:cat:top",
+    "slot": "top",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:polo",
+    "name": "Polo",
+    "parentId": "builtin:cat:top",
+    "slot": "top",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["spring", "summer", "autumn"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:knit",
+    "name": "针织衫/毛衣",
+    "parentId": "builtin:cat:top",
+    "slot": "top",
+    "defaultFormality": 3,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["autumn", "winter", "spring"],
+    "order": 4
+  },
+  {
+    "id": "builtin:cat:hoodie",
+    "name": "卫衣",
+    "parentId": "builtin:cat:top",
+    "slot": "top",
+    "defaultFormality": 2,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["autumn", "winter", "spring"],
+    "order": 5
+  },
+  {
+    "id": "builtin:cat:vest",
+    "name": "背心",
+    "parentId": "builtin:cat:top",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["summer"],
+    "order": 6
+  },
+  {
+    "id": "builtin:cat:camisole",
+    "name": "吊带",
+    "parentId": "builtin:cat:top",
+    "slot": "top",
+    "defaultFormality": 2,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["summer"],
+    "order": 7
+  },
+  {
+    "id": "builtin:cat:base-layer",
+    "name": "打底衫",
+    "parentId": "builtin:cat:top",
+    "slot": "top",
+    "defaultFormality": 2,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["autumn", "winter", "spring"],
+    "order": 8
+  },
+  {
+    "id": "builtin:cat:jeans",
+    "name": "牛仔裤",
+    "parentId": "builtin:cat:bottom",
+    "slot": "bottom",
+    "defaultFormality": 2,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:casual-pants",
+    "name": "休闲裤",
+    "parentId": "builtin:cat:bottom",
+    "slot": "bottom",
+    "defaultFormality": 2,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:dress-pants",
+    "name": "西裤",
+    "parentId": "builtin:cat:bottom",
+    "slot": "bottom",
+    "defaultFormality": 4,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:sweatpants",
+    "name": "运动裤",
+    "parentId": "builtin:cat:bottom",
+    "slot": "bottom",
+    "defaultFormality": 1,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 4
+  },
+  {
+    "id": "builtin:cat:shorts",
+    "name": "短裤",
+    "parentId": "builtin:cat:bottom",
+    "slot": "bottom",
+    "defaultFormality": 2,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["summer"],
+    "order": 5
+  },
+  {
+    "id": "builtin:cat:skirt",
+    "name": "半身裙",
+    "parentId": "builtin:cat:bottom",
+    "slot": "bottom",
+    "defaultFormality": 3,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["spring", "summer"],
+    "order": 6
+  },
+  {
+    "id": "builtin:cat:leggings",
+    "name": "打底裤",
+    "parentId": "builtin:cat:bottom",
+    "slot": "bottom",
+    "defaultFormality": 2,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["autumn", "winter"],
+    "order": 7
+  },
+  {
+    "id": "builtin:cat:one-piece-dress",
+    "name": "连衣裙",
+    "parentId": "builtin:cat:dress",
+    "slot": "dress",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["spring", "summer"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:jumpsuit",
+    "name": "连体裤",
+    "parentId": "builtin:cat:dress",
+    "slot": "dress",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:suit",
+    "name": "套装",
+    "parentId": "builtin:cat:dress",
+    "slot": "dress",
+    "defaultFormality": 4,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["all"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:jacket",
+    "name": "夹克",
+    "parentId": "builtin:cat:outer",
+    "slot": "outer",
+    "defaultFormality": 3,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["spring", "autumn"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:trench",
+    "name": "风衣",
+    "parentId": "builtin:cat:outer",
+    "slot": "outer",
+    "defaultFormality": 3,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["spring", "autumn"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:coat",
+    "name": "大衣",
+    "parentId": "builtin:cat:outer",
+    "slot": "outer",
+    "defaultFormality": 4,
+    "defaultWarmth": 5,
+    "defaultSeasons": ["winter"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:down",
+    "name": "羽绒服",
+    "parentId": "builtin:cat:outer",
+    "slot": "outer",
+    "defaultFormality": 3,
+    "defaultWarmth": 5,
+    "defaultSeasons": ["winter"],
+    "order": 4
+  },
+  {
+    "id": "builtin:cat:blazer",
+    "name": "西装外套",
+    "parentId": "builtin:cat:outer",
+    "slot": "outer",
+    "defaultFormality": 4,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["all"],
+    "order": 5
+  },
+  {
+    "id": "builtin:cat:cardigan",
+    "name": "开衫",
+    "parentId": "builtin:cat:outer",
+    "slot": "outer",
+    "defaultFormality": 2,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["spring", "autumn"],
+    "order": 6
+  },
+  {
+    "id": "builtin:cat:outer-vest",
+    "name": "马甲",
+    "parentId": "builtin:cat:outer",
+    "slot": "outer",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 7
+  },
+  {
+    "id": "builtin:cat:shell",
+    "name": "冲锋衣",
+    "parentId": "builtin:cat:outer",
+    "slot": "outer",
+    "defaultFormality": 2,
+    "defaultWarmth": 3,
+    "defaultSeasons": ["all"],
+    "order": 8
+  },
+  {
+    "id": "builtin:cat:sneakers",
+    "name": "运动鞋",
+    "parentId": "builtin:cat:shoes",
+    "slot": "shoes",
+    "defaultFormality": 1,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:canvas-shoes",
+    "name": "板鞋",
+    "parentId": "builtin:cat:shoes",
+    "slot": "shoes",
+    "defaultFormality": 2,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:leather-shoes",
+    "name": "皮鞋",
+    "parentId": "builtin:cat:shoes",
+    "slot": "shoes",
+    "defaultFormality": 4,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:loafers",
+    "name": "乐福鞋",
+    "parentId": "builtin:cat:shoes",
+    "slot": "shoes",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["spring", "summer", "autumn"],
+    "order": 4
+  },
+  {
+    "id": "builtin:cat:boots",
+    "name": "靴子",
+    "parentId": "builtin:cat:shoes",
+    "slot": "shoes",
+    "defaultFormality": 3,
+    "defaultWarmth": 4,
+    "defaultSeasons": ["autumn", "winter"],
+    "order": 5
+  },
+  {
+    "id": "builtin:cat:sandals",
+    "name": "凉鞋",
+    "parentId": "builtin:cat:shoes",
+    "slot": "shoes",
+    "defaultFormality": 2,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["summer"],
+    "order": 6
+  },
+  {
+    "id": "builtin:cat:slippers",
+    "name": "拖鞋",
+    "parentId": "builtin:cat:shoes",
+    "slot": "shoes",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["summer"],
+    "order": 7
+  },
+  {
+    "id": "builtin:cat:heels",
+    "name": "高跟鞋",
+    "parentId": "builtin:cat:shoes",
+    "slot": "shoes",
+    "defaultFormality": 4,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["spring", "summer", "autumn"],
+    "order": 8
+  },
+  {
+    "id": "builtin:cat:backpack",
+    "name": "双肩包",
+    "parentId": "builtin:cat:bag",
+    "slot": "bag",
+    "defaultFormality": 2,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:shoulder-bag",
+    "name": "单肩包",
+    "parentId": "builtin:cat:bag",
+    "slot": "bag",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:tote",
+    "name": "手提包",
+    "parentId": "builtin:cat:bag",
+    "slot": "bag",
+    "defaultFormality": 4,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:crossbody",
+    "name": "斜挎包",
+    "parentId": "builtin:cat:bag",
+    "slot": "bag",
+    "defaultFormality": 3,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 4
+  },
+  {
+    "id": "builtin:cat:hat",
+    "name": "帽子",
+    "parentId": "builtin:cat:accessory",
+    "slot": "accessory",
+    "defaultFormality": 2,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:scarf",
+    "name": "围巾",
+    "parentId": "builtin:cat:accessory",
+    "slot": "accessory",
+    "defaultFormality": 3,
+    "defaultWarmth": 4,
+    "defaultSeasons": ["autumn", "winter"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:belt",
+    "name": "腰带",
+    "parentId": "builtin:cat:accessory",
+    "slot": "accessory",
+    "defaultFormality": 4,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:gloves",
+    "name": "手套",
+    "parentId": "builtin:cat:accessory",
+    "slot": "accessory",
+    "defaultFormality": 2,
+    "defaultWarmth": 4,
+    "defaultSeasons": ["winter"],
+    "order": 4
+  },
+  {
+    "id": "builtin:cat:socks",
+    "name": "袜子",
+    "parentId": "builtin:cat:accessory",
+    "slot": "accessory",
+    "defaultFormality": 2,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 5
+  },
+  {
+    "id": "builtin:cat:jewelry",
+    "name": "首饰",
+    "parentId": "builtin:cat:accessory",
+    "slot": "accessory",
+    "defaultFormality": 4,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 6
+  },
+  {
+    "id": "builtin:cat:glasses",
+    "name": "眼镜",
+    "parentId": "builtin:cat:accessory",
+    "slot": "accessory",
+    "defaultFormality": 2,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 7
+  },
+  {
+    "id": "builtin:cat:tie",
+    "name": "领带",
+    "parentId": "builtin:cat:accessory",
+    "slot": "accessory",
+    "defaultFormality": 5,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 8
+  },
+  {
+    "id": "builtin:cat:underwear-top",
+    "name": "内衣",
+    "parentId": "builtin:cat:underwear",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:underwear-bottom",
+    "name": "内裤",
+    "parentId": "builtin:cat:underwear",
+    "slot": "bottom",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:loungewear",
+    "name": "家居服",
+    "parentId": "builtin:cat:underwear",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:pajamas",
+    "name": "睡衣",
+    "parentId": "builtin:cat:underwear",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 4
+  },
+  {
+    "id": "builtin:cat:swimwear",
+    "name": "泳装",
+    "parentId": "builtin:cat:underwear",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["summer"],
+    "order": 5
+  },
+  {
+    "id": "builtin:cat:sport-top",
+    "name": "运动上衣",
+    "parentId": "builtin:cat:sport",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 1
+  },
+  {
+    "id": "builtin:cat:sport-pants",
+    "name": "运动裤",
+    "parentId": "builtin:cat:sport",
+    "slot": "bottom",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 2
+  },
+  {
+    "id": "builtin:cat:sport-bra",
+    "name": "运动内衣",
+    "parentId": "builtin:cat:sport",
+    "slot": "top",
+    "defaultFormality": 1,
+    "defaultWarmth": 1,
+    "defaultSeasons": ["all"],
+    "order": 3
+  },
+  {
+    "id": "builtin:cat:sport-outer",
+    "name": "运动外套",
+    "parentId": "builtin:cat:sport",
+    "slot": "outer",
+    "defaultFormality": 2,
+    "defaultWarmth": 2,
+    "defaultSeasons": ["all"],
+    "order": 4
+  }
+]

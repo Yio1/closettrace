@@ -385,24 +385,26 @@ Dexie v1 stores:
 
 ```ts
 this.version(1).stores({
-  items: 'id, name, categoryId, status, locationId, isFavorite, lastWornAt, updatedAt, archivedAt, *sceneTags, *seasons, *styleTags',
+  items: 'id, name, categoryId, status, locationId, lastWornAt, updatedAt, archivedAt, *sceneTags, *seasons, *styleTags',
   itemPhotos: 'id, itemId, [itemId+order]',
-  categories: 'id, parentId, slot, archived, order',
+  categories: 'id, parentId, slot, order',
   locations: 'id, parentId, order',
-  outfits: 'id, isFavorite, lastWornAt, updatedAt, *sceneIds',
+  outfits: 'id, lastWornAt, updatedAt, *sceneIds',
   outfitItems: 'id, outfitId, itemId, [outfitId+order]',
   wearLogs: 'id, date, outfitId, sceneId, [date+sceneId], *itemIds',
-  scenes: 'id, archived, order',
+  scenes: 'id, order',
   outfitFeedback: 'id, signature, sceneId',
   purchases: 'id, itemId, purchasedAt, channel',
   wishlistItems: 'id, status, categoryId, priority, updatedAt',
   priceQuotes: 'id, wishlistId, observedAt, [wishlistId+observedAt]',
-  colors: 'id, family, isNeutral, order',
+  colors: 'id, family, order',
   styleTags: 'id, order',
   settings: 'key',
   diagnostics: 'id, at',
 });
 ```
+
+IndexedDB rejects booleans as index keys, so `isFavorite`, `archived`, and `isNeutral` are stored but filtered in memory (wardrobe ≤ 2000 items).
 
 - [ ] **Step 4: Write dictionary content**
 

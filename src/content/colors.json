@@ -1,0 +1,218 @@
+[
+  {
+    "id": "builtin:color:black",
+    "name": "黑",
+    "hex": "#111111",
+    "hue": 0,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 1
+  },
+  {
+    "id": "builtin:color:white",
+    "name": "白",
+    "hex": "#FFFFFF",
+    "hue": 0,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 2
+  },
+  {
+    "id": "builtin:color:off-white",
+    "name": "米白",
+    "hex": "#F5EFE3",
+    "hue": 40,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 3
+  },
+  {
+    "id": "builtin:color:light-gray",
+    "name": "浅灰",
+    "hex": "#D9D9D6",
+    "hue": 60,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 4
+  },
+  {
+    "id": "builtin:color:dark-gray",
+    "name": "深灰",
+    "hex": "#4A4A4A",
+    "hue": 0,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 5
+  },
+  {
+    "id": "builtin:color:navy",
+    "name": "藏青",
+    "hex": "#1F2A44",
+    "hue": 222,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 6
+  },
+  {
+    "id": "builtin:color:denim",
+    "name": "牛仔蓝",
+    "hex": "#4A6C8C",
+    "hue": 208,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 7
+  },
+  {
+    "id": "builtin:color:brown",
+    "name": "棕",
+    "hex": "#6B4B36",
+    "hue": 25,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 8
+  },
+  {
+    "id": "builtin:color:khaki",
+    "name": "卡其",
+    "hex": "#BFA77A",
+    "hue": 40,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 9
+  },
+  {
+    "id": "builtin:color:silver",
+    "name": "银",
+    "hex": "#B8BCC0",
+    "hue": 210,
+    "family": "neutral",
+    "isNeutral": true,
+    "order": 10
+  },
+  {
+    "id": "builtin:color:red",
+    "name": "红",
+    "hex": "#C0392B",
+    "hue": 6,
+    "family": "warm",
+    "isNeutral": false,
+    "order": 11
+  },
+  {
+    "id": "builtin:color:wine",
+    "name": "酒红",
+    "hex": "#6E1F2B",
+    "hue": 351,
+    "family": "warm",
+    "isNeutral": false,
+    "order": 12
+  },
+  {
+    "id": "builtin:color:orange",
+    "name": "橙",
+    "hex": "#E07A2E",
+    "hue": 26,
+    "family": "warm",
+    "isNeutral": false,
+    "order": 13
+  },
+  {
+    "id": "builtin:color:caramel",
+    "name": "焦糖",
+    "hex": "#A76B3F",
+    "hue": 28,
+    "family": "warm",
+    "isNeutral": false,
+    "order": 14
+  },
+  {
+    "id": "builtin:color:yellow",
+    "name": "黄",
+    "hex": "#E6C34A",
+    "hue": 47,
+    "family": "warm",
+    "isNeutral": false,
+    "order": 15
+  },
+  {
+    "id": "builtin:color:pink",
+    "name": "粉",
+    "hex": "#E8A6B4",
+    "hue": 348,
+    "family": "warm",
+    "isNeutral": false,
+    "order": 16
+  },
+  {
+    "id": "builtin:color:purple",
+    "name": "紫",
+    "hex": "#7C5CD6",
+    "hue": 258,
+    "family": "warm",
+    "isNeutral": false,
+    "order": 17
+  },
+  {
+    "id": "builtin:color:gold",
+    "name": "金",
+    "hex": "#C9A227",
+    "hue": 45,
+    "family": "warm",
+    "isNeutral": false,
+    "order": 18
+  },
+  {
+    "id": "builtin:color:blue",
+    "name": "蓝",
+    "hex": "#2E6DB4",
+    "hue": 213,
+    "family": "cool",
+    "isNeutral": false,
+    "order": 19
+  },
+  {
+    "id": "builtin:color:sky",
+    "name": "天蓝",
+    "hex": "#6FB3D9",
+    "hue": 199,
+    "family": "cool",
+    "isNeutral": false,
+    "order": 20
+  },
+  {
+    "id": "builtin:color:teal",
+    "name": "青",
+    "hex": "#2A9D8F",
+    "hue": 174,
+    "family": "cool",
+    "isNeutral": false,
+    "order": 21
+  },
+  {
+    "id": "builtin:color:green",
+    "name": "绿",
+    "hex": "#3C8C5A",
+    "hue": 143,
+    "family": "cool",
+    "isNeutral": false,
+    "order": 22
+  },
+  {
+    "id": "builtin:color:olive",
+    "name": "橄榄",
+    "hex": "#6B7A3A",
+    "hue": 72,
+    "family": "cool",
+    "isNeutral": false,
+    "order": 23
+  },
+  {
+    "id": "builtin:color:mint",
+    "name": "薄荷",
+    "hex": "#9BD4C0",
+    "hue": 160,
+    "family": "cool",
+    "isNeutral": false,
+    "order": 24
+  }
+]
