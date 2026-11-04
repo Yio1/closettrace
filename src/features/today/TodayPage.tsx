@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { Shirt } from 'lucide-react';
+import type { Item } from '../../domain/types';
 import { diffDays, formatDateZh, toISODate, todayISO } from '../../domain/date';
 import { idleItems } from '../../domain/stats';
 import { getSetting, setSetting } from '../../db/repositories/settings';
@@ -13,6 +14,8 @@ import { Card } from '../../components/ui/Card';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { NumberField } from '../../components/ui/NumberField';
 import { PageHeader } from '../../components/ui/PageHeader';
+import { RecommendationPanel } from '../outfits/RecommendationPanel';
+import { useRecommendations } from '../outfits/useRecommendations';
 import { WearLogSheet } from './WearLogSheet';
 
 const DEFAULT_SCENE_ID = 'builtin:scene:casual';
@@ -47,6 +50,11 @@ function TodayContent({
   const [sceneId, setSceneId] = useState(initialSceneId);
   const [tempC, setTempC] = useState(initialTempC);
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [nonce, setNonce] = useState(0);
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [recommendedWear, setRecommendedWear] = useState<Item[] | null>(null);
+  const recommendation = useRecommendations({ sceneId, tempC, nonce });
+  const topRecommendation = recommendation.results[0];
 
   if (itemRows === undefined) return null;
 
@@ -137,9 +145,51 @@ function TodayContent({
                 {selectedScene?.name ?? '未选场景'} · {tempC}°C
               </span>
             </div>
-            <p className="mt-2 text-sm text-muted">
-              规则推荐正在准备中。先用“记录穿着”记下今天穿了什么，分析和推荐会用到这些数据。
-            </p>
+            {recommendation.data === undefined ? (
+              <p className="mt-2 text-sm text-muted">正在准备推荐…</p>
+            ) : recommendation.gaps.length > 0 ? (
+              <div className="mt-2 space-y-2">
+                <p className="text-sm text-muted">衣柜还缺这几类：</p>
+                <ul className="space-y-0.5 text-sm">
+                  {recommendation.gaps.map((gap) => (
+                    <li key={gap}>{gap}</li>
+                  ))}
+                </ul>
+                <Link
+                  to="/wardrobe/item/new"
+                  className="inline-flex min-h-11 items-center rounded-xl bg-accent px-4 text-sm text-on-accent"
+                >
+                  去添加
+                </Link>
+              </div>
+            ) : topRecommendation ? (
+              <div className="mt-2 space-y-2">
+                <p className="text-sm font-medium">
+                  {topRecommendation.items.map((item) => item.name).join(' + ')}
+                </p>
+                <p className="text-xs text-muted">{topRecommendation.reasons[0]}</p>
+                {topRecommendation.relaxed.length > 0 ? (
+                  <p className="text-xs text-accent-text">
+                    已放宽条件：{topRecommendation.relaxed.join(' ')}
+                  </p>
+                ) : null}
+                <div className="flex flex-wrap gap-2">
+                  <Button onClick={() => setRecommendedWear(topRecommendation.items)}>
+                    就穿这套
+                  </Button>
+                  <Button variant="secondary" onClick={() => setNonce((current) => current + 1)}>
+                    换一套
+                  </Button>
+                  <Button variant="secondary" onClick={() => setPanelOpen(true)}>
+                    查看 {recommendation.results.length} 套
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <p className="mt-2 text-sm text-muted">
+                暂时没有可推荐的搭配，换个场景或温度试试。
+              </p>
+            )}
           </Card>
 
           <Card className="flex items-center justify-between gap-3">
@@ -215,6 +265,26 @@ function TodayContent({
           open
           onClose={() => setSheetOpen(false)}
           date={today}
+          sceneId={sceneId}
+          tempC={tempC}
+        />
+      ) : null}
+
+      {panelOpen ? (
+        <RecommendationPanel
+          open
+          onClose={() => setPanelOpen(false)}
+          initialSceneId={sceneId}
+          initialTempC={tempC}
+        />
+      ) : null}
+
+      {recommendedWear ? (
+        <WearLogSheet
+          open
+          onClose={() => setRecommendedWear(null)}
+          date={today}
+          presetItems={recommendedWear}
           sceneId={sceneId}
           tempC={tempC}
         />

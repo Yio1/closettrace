@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
-import { Layers, Shirt } from 'lucide-react';
+import { Shirt } from 'lucide-react';
 import type { OutfitItem } from '../../domain/types';
 import { listItems } from '../../db/repositories/items';
 import { listAllOutfitItems, listOutfits } from '../../db/repositories/outfits';
@@ -12,6 +12,7 @@ import { Button } from '../../components/ui/Button';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { PageHeader } from '../../components/ui/PageHeader';
 import { SegmentedControl } from '../../components/ui/SegmentedControl';
+import { RecommendationPanel } from './RecommendationPanel';
 
 type OutfitView = 'mine' | 'recommend';
 
@@ -73,16 +74,7 @@ export function OutfitsPage() {
       </div>
 
       {view === 'recommend' ? (
-        <EmptyState
-          icon={<Layers size={28} aria-hidden />}
-          title="推荐即将上线"
-          description="填写场景和温度后会生成可解释的搭配。至少需要上装、下装和鞋。"
-          action={
-            <Button variant="secondary" onClick={() => setView('mine')}>
-              返回我的搭配
-            </Button>
-          }
-        />
+        <RecommendationPanel open onClose={() => setView('mine')} />
       ) : outfits.length === 0 ? (
         <EmptyState
           icon={<Shirt size={28} aria-hidden />}

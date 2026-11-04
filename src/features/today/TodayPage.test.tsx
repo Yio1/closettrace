@@ -25,6 +25,33 @@ async function addItem(name: string, status: 'available' | 'laundry' = 'availabl
   });
 }
 
+async function addFullOutfit() {
+  await createItem({
+    name: '白衬衫',
+    categoryId: 'builtin:cat:shirt',
+    colorPrimaryId: 'builtin:color:white',
+    warmth: 2,
+    formality: 2,
+    seasons: ['all'],
+  });
+  await createItem({
+    name: '牛仔裤',
+    categoryId: 'builtin:cat:jeans',
+    colorPrimaryId: 'builtin:color:denim',
+    warmth: 2,
+    formality: 2,
+    seasons: ['all'],
+  });
+  await createItem({
+    name: '运动鞋',
+    categoryId: 'builtin:cat:sneakers',
+    colorPrimaryId: 'builtin:color:white',
+    warmth: 2,
+    formality: 2,
+    seasons: ['all'],
+  });
+}
+
 function renderToday() {
   return render(
     <MemoryRouter initialEntries={['/']}>
@@ -48,7 +75,7 @@ describe('TodayPage', () => {
     );
   });
 
-  it('shows the temperature control, scene chips, and recommendation placeholder', async () => {
+  it('shows the temperature control, scene chips, and setup gaps', async () => {
     await addItem('白衬衫');
     renderToday();
 
@@ -56,6 +83,35 @@ describe('TodayPage', () => {
     expect(screen.getByRole('button', { name: '通勤' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '休闲' })).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByText('今日推荐')).toBeInTheDocument();
+    expect(await screen.findByText('还缺下装')).toBeInTheDocument();
+    expect(screen.getByText('还缺鞋')).toBeInTheDocument();
+  });
+
+  it('shows the top recommendation with wear, refresh, and panel actions', async () => {
+    await addFullOutfit();
+    const user = userEvent.setup();
+    renderToday();
+
+    expect(await screen.findByRole('button', { name: '就穿这套' })).toBeInTheDocument();
+    expect(screen.getByText(/白衬衫 \+ 牛仔裤 \+ 运动鞋/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '换一套' })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /查看 \d+ 套/ }));
+    expect(await screen.findByText('衣迹推荐')).toBeInTheDocument();
+  });
+
+  it('logs a wear from the top recommendation', async () => {
+    await addFullOutfit();
+    const user = userEvent.setup();
+    renderToday();
+
+    await user.click(await screen.findByRole('button', { name: '就穿这套' }));
+    expect(await screen.findByText(/记录 .* 的穿着/)).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: '保存穿着' }));
+
+    expect(await screen.findByText('今天已穿')).toBeInTheDocument();
+    expect(await db.wearLogs.count()).toBe(1);
+    expect(await db.items.filter((item) => item.wearCount === 1).count()).toBe(3);
   });
 
   it('logs a wear from selected items and shows today worn', async () => {
